@@ -1,0 +1,18 @@
+{% extends 'muxic/user.html' %}
+{% block song %}
+    {% if favorite_song %}
+        {% for song in favorite_song %}
+            <tr>
+                <td class="col-md-3"><a href="{% url 'muxic:songdetail' song.id %}">{{ song.title }}</a></td>
+                <td class="col-md-3">{{ song.artist }}</td>
+                <td class="col-md-3">{{ song.date_release }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td>Không có bài hát yêu thích</td>
+        </tr>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'muxic/theme.html' %}
+{% block title %} MuXic {% endblock title %}
+{% load staticfiles %}
+
+{% block body %}
+    <div class="container" style="margin-left: 90px">
+        <div class="row" id="TopDetail">
+            <div class="col-md-9">
+                <h3 style="margin-left: 5%; color: #ffffff">{{ song.title }} - {{ song.artist }}</h3>
+                <h5 style="margin-left: 5%; color: #ffffff">{{ song.genre }}</h5>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="mp3_player">
+                            <canvas id="analyser_render"></canvas>
+                            <div id="audio_box"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-body" id="Bottom">
+            <br>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-9" id="left_song">
+                        <div class="col-md-3" style="margin-left: -20px">
+                            <div class="col-md-12" style="margin-bottom: 10px">
+                                <img src="{{ song.logo.url }}" id="UploadPic2">
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 10px; margin-left: 50px">
+                                {% if user.is_authenticated %}
+                                    {% if is_favorite == True %}
+                                        <form action="{% url 'muxic:unfavorite' song.id %}" method="get"
+                                              style="display: inline">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="song_id" value="{{ song.id }}"/>
+                                            <input type="hidden" name="path" value="{{ request.path }}">
+                                            <button type="submit" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-heart"></span>
+                                            </button>
+                                            <label>{{ song.favorite.all.count }}</label>
+                                        </form>
+                                    {% else %}
+                                        <form action="{% url 'muxic:favorite' song.id %}" method="get"
+                                              style="display: inline">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="song_id" value="{{ song.id }}"/>
+                                            <input type="hidden" name="path" value="{{ request.path }}">
+                                            <button type="submit" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-heart-empty"></span>
+                                            </button>
+                                            <label>{{ song.favorite.all.count }}</label>
+                                        </form>
+                                    {% endif %}
+                                {% else %}
+                                    <button type="submit" class="btn btn-default btn-sm">
+                                        <span class="glyphicon glyphicon-circle-arrow-up"><a
+                                                href="{% url 'muxic:login' %}">Favorite </a></span>
+                                    </button>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <ul style="margin-left: -30px">
+                                    <li>Tên bài hát: {{ song.title }}</li>
+                                    <li>Thể loại: <a
+                                            href="{% url 'muxic:genre_filter' song.genre %}">{{ song.genre }}</a></li>
+                                    <li>Ca sĩ: {{ song.artist }}</li>
+                                    <li>Người đăng: <a
+                                            href="{% url 'muxic:user' song.owner %}">{{ song.owner }}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-9" style="border-left: 1px solid #9d9d9d">
+                            <div class="col-md-12">
+                                <h3>Lời bài hát:</h3>
+                                <div id="Lyric_feild">
+                                    {{ song.lyric | linebreaksbr }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators" style="display: none">
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="{% static 'muxic/images/images-1.jpg' %}" alt="item 1">
+                                    <div class="carousel-caption">
+                                        <h3> Enjoy your moment</h3>
+                                        <h5>Be happy for this moment</h5>
+                                    </div>
+                                </div>
+                                <div class="item ">
+                                    <img src="{% static 'muxic/images/images-2.jpg' %}" alt="item 2">
+                                    <div class="carousel-caption">
+                                        <h3> Live your life</h3>
+                                        <h5>Live your life in your own way</h5>
+                                    </div>
+                                </div>
+                                <div class="item ">
+                                    <img src="{% static 'muxic/images/images-3.jpg' %}" alt="item 3">
+                                    <div class="carousel-caption">
+                                        <h3> No music</h3>
+                                        <h4>We riot</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <script>
+        var audio = new Audio();
+        audio.src = '{{ song.file.url }}';
+        audio.controls = true;
+        audio.loop = true;
+        audio.autoplay = true;
+    </script>
+
+{% endblock body %}

@@ -1,0 +1,89 @@
+{% extends 'muxic/theme.html' %}
+{% block title %} MuXic {% endblock title %}
+{% load staticfiles %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row col-md-12">
+            <div class="col-md-9">
+                <table class="table table-hover table-dark">
+                    <thead>
+                    <tr>
+                        <th class="col-md-4">Tên bài hát</th>
+                        {#                        <th class="col-md-3">Ca Sĩ</th>#}
+                        <th class="col-md-3">Thể loại</th>
+                        <th class="col-md-3">Ngày cập nhật</th>
+                        <th class="col-md-3">Người đăng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% block songlist %}
+                        {% for song in song_list %}
+                            <tr>
+                                <td class="col-md-4"><a href="{% url 'muxic:songdetail' song.pk %}">{{ song.title }}
+                                    - {{ song.artist }}</a>
+                                </td>
+                                {#                            <td class="col-md-3">{{ song.artist }}</td>#}
+                                <td class="col-md-3"><a
+                                        href="{% url 'muxic:genre_filter' song.genre %}">{{ song.genre }}</a></td>
+                                <td class="col-md-3">{{ song.date_release }}</td>
+                                <td class="col-md-3"><a href="{% url 'muxic:user' song.owner %}">{{ song.owner }}</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endblock %}
+                    </tbody>
+                </table>
+                <div class="pagination">
+                            <span class="step-links">
+                                {% if page_obj.has_previous %}
+                                    <a href="?page=1">&laquo; first</a>
+                                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                </span>
+
+                                {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                                {% endif %}
+                            </span>
+                        </div>
+            </div>
+            <div class="col-md-3" id="rightslide">
+                <div class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators" style="display: none">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="{% static 'muxic/images/images-1.jpg' %}" alt="item 1">
+                            <div class="carousel-caption">
+                                <h3> Enjoy your moment</h3>
+                                <h5>Be happy for this moment</h5>
+                            </div>
+                        </div>
+                        <div class="item ">
+                            <img src="{% static 'muxic/images/images-2.jpg' %}" alt="item 2">
+                            <div class="carousel-caption">
+                                <h3> Live your life</h3>
+                                <h5>Live your life in your own way</h5>
+                            </div>
+                        </div>
+                        <div class="item ">
+                            <img src="{% static 'muxic/images/images-3.jpg' %}" alt="item 3">
+                            <div class="carousel-caption">
+                                <h3> No music</h3>
+                                <h4>We riot</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

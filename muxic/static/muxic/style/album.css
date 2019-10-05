@@ -1,0 +1,43 @@
+#Add div>div{
+  margin-bottom: 20px;
+}
+
+#id_title {
+  width: 400px;
+  border-radius: 15px;
+  border: 1px solid #cccccc;
+  /*text-align: center;*/
+  font-size: 15px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+}
+
+#id_artist {
+  width: 400px;
+  border-radius: 15px;
+  border: 1px solid #cccccc;;
+  /*text-align: center;*/
+  font-size: 15px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+}
+
+#id_date_release {
+  width: 400px;
+  border-radius: 15px;
+  border: 1px solid #cccccc;
+  /*text-align: center;*/
+  font-size: 15px;
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  height: 36px;
+  padding: 0 8px;
+}
+
+#add_album input:focus{
+  border: 1px solid #00a1ff;
+}

@@ -1,0 +1,23 @@
+{% extends 'muxic/theme.html' %}
+{% block title %} Muxic {% endblock title %}
+{% load staticfiles %}
+{% block body %}
+
+    <div class="container-fluid" style="font-size: 15px" id="add_album">
+        <br>
+        <div class="row">
+            <div class="col-sm-12 col-md-7" style="">
+                <form class="form-group" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% include 'muxic/form_template.html' %}
+                    <div class="form-group">
+                        <div class="col-sm-offset-6 col-sm-3"><br>
+                            <button type="submit" class="btn btn-success">Tải lên
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

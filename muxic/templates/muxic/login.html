@@ -1,0 +1,30 @@
+{% extends 'muxic/theme.html' %}
+{% block body %}
+    <form class="form-group" id="login-form" method="post" style="text-align: center; margin-top: 150px">
+        {% csrf_token %}
+        {% for key, value in form.error.item %}{{ value }}{% endfor %}
+        {% if error_messages %}
+            <p>{{ error_messages }}</p>
+        {% endif %}
+        <div class="form-group">
+            <label class="required" for="id_username">Username:&nbsp;</label>{{ form.username }}
+        </div>
+        <div class="form-group">
+            <label class="required" for="id_password">Password:&nbsp;</label>{{ form.password }}
+        </div>
+        <br>
+        <div>
+            <p>Chưa có tài khoản? <a href="{% url 'muxic:register' %}">Đăng ký</a></p>
+        </div>
+        <input type="hidden" name="next" value="/"/><br>
+        <div class="row">
+            <div class=" col-sm-offset-2 col-sm-4">
+            </div>
+            <div class="col-sm-4">
+                <div style="text-align: left">
+                    <button type="submit" class="btn btn-success">Đăng nhập</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

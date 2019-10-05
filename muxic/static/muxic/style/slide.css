@@ -1,0 +1,33 @@
+/* slide */
+.media-carousel 
+{
+  margin-bottom: 0;
+  padding: 0 40px 30px 40px;
+  margin-top: 30px;
+}
+/* nut trai  */
+.media-carousel .carousel-control.left 
+{
+  left: -12px;
+  background-image: none;
+  border-radius: 23px 23px 23px 23px;
+  height: 40px;
+  width : 40px;
+  margin-top: 30px
+}
+/* nut phai  */
+.media-carousel .carousel-control.right 
+{
+  right: -12px !important;
+  background-image: none;
+  border-radius: 23px 23px 23px 23px;
+  height: 40px;
+  width : 40px;
+  margin-top: 30px
+}
+
+.media-carousel img
+{
+  width: 100%;
+  height:100%;
+}
