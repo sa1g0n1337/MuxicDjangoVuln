@@ -92,7 +92,7 @@ class CreateSongForm(forms.ModelForm):
         logo = cleaned_data.get('logo')
         logo_type = logo.content_type.split('/')[0]
         if logo_type in settings.LOGO_TYPES:
-            if logo._size > settings.MAX_UPLOAD_SIZE:
+            if logo.size > settings.MAX_UPLOAD_SIZE:
                 raise forms.ValidationError(
                     _('Vui lòng tải lên hình ảnh có dung lượng dưới %s. Dung lượng hiện tại %s') % (
                         filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(logo._size)))
@@ -105,7 +105,7 @@ class CreateSongForm(forms.ModelForm):
         file = cleaned_data.get('file')
         file_type = file.content_type.split('/')[0]
         if file_type in settings.MUSIC_TYPES:
-            if file._size > settings.MAX_UPLOAD_SIZE:
+            if file.size > settings.MAX_UPLOAD_SIZE:
                 raise forms.ValidationError(
                     _('Vui lòng tải lên bài hát có dung lượng dưới %s. Dung lượng hiện tại %s') % (
                         filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(file._size)))
@@ -127,7 +127,7 @@ class UpdateSongForm(forms.ModelForm):
         logo = cleaned_data.get('logo')
         logo_type = logo.content_type.split('/')[0]
         if logo_type in settings.LOGO_TYPES:
-            if logo._size > settings.MAX_UPLOAD_SIZE:
+            if logo.size > settings.MAX_UPLOAD_SIZE:
                 raise forms.ValidationError(
                     _('Vui lòng tải lên hình ảnh có dung lượng dưới %s. Dung lượng hiện tại %s') % (
                         filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(logo._size)))
@@ -140,7 +140,7 @@ class UpdateSongForm(forms.ModelForm):
         file = cleaned_data.get('file')
         file_type = file.content_type.split('/')[0]
         if file_type in settings.MUSIC_TYPES:
-            if file._size > settings.MAX_UPLOAD_SIZE:
+            if file.size > settings.MAX_UPLOAD_SIZE:
                 raise forms.ValidationError(
                     _('Vui lòng tải lên bài hát có dung lượng dưới %s. Dung lượng hiện tại %s') % (
                         filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(file._size)))
